@@ -21,7 +21,7 @@ export function RepositoryList() {
       ? getUserRepositories(username)
       : getUserStarred(username),
     enabled: !!username,
-  });
+  });  
   
   if (!username) {
     return (
@@ -32,13 +32,21 @@ export function RepositoryList() {
   }
 
   if (isLoading) {
-    return <div className="text-center">Loading...</div>;
+    return <div className="text-center">Carregando...</div>;
   }
 
   if (error) {
     return (
       <div className="text-center text-destructive">
-        Error loading repositories
+        Erro ao carregar os repositórios
+      </div>
+    );
+  }
+
+  if (!repositories?.length) {
+    return (
+      <div className="text-center text-muted-foreground">
+        Nenhum repositório encontrado
       </div>
     );
   }
