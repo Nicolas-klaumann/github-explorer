@@ -48,7 +48,7 @@ export function RepositoryList() {
       {repositories?.map((repo) => (
         // monta o link de acesso para os detalhes do repositorio
         <Link href={`/repository/${repo.full_name}`} key={repo.id}>
-          <Card className="p-4 hover:bg-accent transition-colors">
+          <Card className="p-4 hover:bg-accent transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg">
             <h3 className="font-semibold mb-2">{repo.name}</h3>
             <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
               {repo.description || 'No description available'}

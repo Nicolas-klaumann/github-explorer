@@ -8,6 +8,25 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+/* Estiliza a scrollbar para navegadores baseados em WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 6px; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Fundo transparente */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b0b0b0; /* Cor do indicador da rolagem */
+  border-radius: 4px; /* Borda arredondada */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888; /* Cor ao passar o mouse */
+}
+
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

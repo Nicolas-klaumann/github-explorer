@@ -4,9 +4,11 @@ import { RepositoryList } from '@/components/repository-list';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center mb-8">GitHub Explorer</h1>
+    <main className='min-h-screen bg-background overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent'>
+      <div className='container mx-auto px-4 py-8'>
+        <h1 className='text-4xl text-center mb-8 text-gray-900 dark:text-white drop-shadow-lg'>
+          GITHUB EXPLORER
+        </h1>
         {/* Barra de pesquisa do usuarios */}
         <SearchBar />
 
