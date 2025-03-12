@@ -18,6 +18,7 @@ export interface RepositoryDetails extends Repository {
   topics: string[];
   created_at: string;
   updated_at: string;
+  commits: any;
   homepage: string | null;
   license: {
     name: string;

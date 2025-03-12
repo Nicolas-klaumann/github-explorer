@@ -35,9 +35,20 @@ export async function getRepositoryDetails(
   owner: string,
   repo: string
 ): Promise<RepositoryDetails> {
-  console.log(`${BASE_URL}/repos/${owner}/${repo}`);
-
+  // busca o repositorio
   const response = await fetch(`${BASE_URL}/repos/${owner}/${repo}`);
   if (!response.ok) throw new Error('Failed to fetch repository details');
-  return response.json();
+  const repository = await response.json();
+
+  // busca os commits do repositorio
+  const responseCommits = await fetch(
+    `${BASE_URL}/repos/${owner}/${repo}/commits`
+  );
+  if (!responseCommits.ok) {
+    throw new Error('Failed to fetch repository commits');
+  }
+
+  const commits = await responseCommits.json();
+
+  return { ...repository, commits: commits };
 }
