@@ -47,13 +47,7 @@ export default function Home() {
           </aside>
         )}        
 
-        {/* Conteúdo principal - Direita no desktop, abaixo do perfil no mobile */}
         <section className="flex-1 flex flex-col">
-          {/* Título */}
-          <h1 className='text-4xl text-center mb-8 text-gray-900 dark:text-white drop-shadow-lg flex items-center justify-center'>
-            GITHUB EXPLORER <Github  size={32}/>
-          </h1>
-
           {/* Barra de pesquisa */}
           <SearchBar />
 
