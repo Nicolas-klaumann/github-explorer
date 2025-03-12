@@ -7,6 +7,7 @@ export interface Repository {
   stargazers_count: number;
   forks_count: number;
   open_issues_count: number;
+  language: string;
   owner: {
     login: string;
     avatar_url: string;

@@ -70,6 +70,10 @@ export function RepositoryList() {
                 <AlertCircle className='w-4 h-4' />
                 {repo.open_issues_count}
               </span>
+            
+              <span className='ml-auto text-sm text-blue-500'>
+                {repo.language}
+              </span>
             </div>
           </Card>
         </Link>
