@@ -23,7 +23,7 @@ export function User() {
   return (
     <div className='flex flex-col items-center'>
       {user && (
-        <div className="flex flex-col items-center mb-8 p-6 w-[300px] max-w-md bg-white rounded-lg shadow-md border border-gray-200">
+        <div className="flex flex-col items-center mb-8 p-6 w-auto max-w-md bg-white rounded-lg shadow-md border border-gray-200">
           {/* Foto e Nome */}
           <img
             src={user.avatar_url}
