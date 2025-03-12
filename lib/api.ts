@@ -52,3 +52,13 @@ export async function getRepositoryDetails(
 
   return { ...repository, commits: commits };
 }
+
+/**
+ * Busca o perfil do usuario
+ * @param username
+ */
+export async function getUser(username: string) {
+  const response = await fetch(`${BASE_URL}/users/${username}`);
+  if (!response.ok) throw new Error('Usuário não encontrado');
+  return response.json();
+}
