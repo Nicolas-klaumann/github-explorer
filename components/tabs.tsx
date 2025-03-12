@@ -13,7 +13,7 @@ export function Tabs() {
   const { activeTab, setActiveTab } = useGithubStore();
 
   return (
-    <TabsComponent value={activeTab} onValueChange={setActiveTab} className="mb-8">
+    <TabsComponent value={activeTab} onValueChange={(value) => setActiveTab(value as 'repositories' | 'starred')} className="mb-8">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="repositories" className='gap-2'><Book size={15} />Respositorios</TabsTrigger>
         <TabsTrigger value="starred" className='gap-2'>
