@@ -204,7 +204,7 @@ export default function RepositoryPage({
         <h1 className='text-3xl font-bold mb-2'>Commits do Repositório</h1>
         {repository?.commits.map((objCommit: any) => (
           <Card className='mb-4 p-4 shadow-md' key={objCommit.sha}>
-            <div className='flex items-center gap-3'>
+            <div className='mb-4 flex items-center gap-3'>
               <img
                 src={objCommit.author.avatar_url}
                 alt='Avatar do autor'
@@ -215,10 +215,11 @@ export default function RepositoryPage({
             <a
               href={objCommit.html_url}
               target='_blank'
-              className='font-semibold mt-2 hover:underline'
+              className='font-semibold mt-2  hover:underline'
             >
               {objCommit.commit.message}
             </a>
+            <p>{format(new Date(objCommit.commit.author.date), 'MMM d, yyyy')}</p>
           </Card>
         ))}
       </Card>
