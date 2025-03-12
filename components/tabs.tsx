@@ -3,7 +3,12 @@
 import { Tabs as TabsComponent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useGithubStore } from '@/lib/store';
 
+/**
+ * função responsável por criar as abas de navegação dos repositorios
+ * @returns 
+ */
 export function Tabs() {
+  // chama a variavel global de controle das abas
   const { activeTab, setActiveTab } = useGithubStore();
 
   return (

@@ -17,12 +17,8 @@ import { Loading } from './validations/Loading';
 export function RepositoryList() {
   const { username, activeTab } = useGithubStore();
 
-  // verifica qual aba esta ativa para buscar os repositorios
-  const {
-    data: repositories,
-    isLoading,
-    error,
-  } = useQuery({
+  // busca os repositorios de acordo com a aba selecionada
+  const { data: repositories, isLoading, error } = useQuery({
     queryKey: [activeTab, username],
     queryFn: () =>
       activeTab === 'repositories'

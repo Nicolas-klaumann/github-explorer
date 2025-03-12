@@ -5,8 +5,14 @@ import { useGithubStore } from '@/lib/store';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
 
+/**
+ * Função responsável por criar o campo de pesquisa de username
+ * @returns 
+ */
 export function SearchBar() {
   const [inputValue, setInputValue] = useState('');
+
+  // chama a variavel global username
   const setUsername = useGithubStore((state) => state.setUsername);
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -17,18 +17,21 @@ import {
 import Link from 'next/link';
 import { format } from 'date-fns';
 
+/**
+ * Função responsavel por renderizar a pagina de detalhes do repositorio
+ * @param param
+ * @returns 
+ */
 export default function RepositoryPage({
   params,
 }: {
   params: { slug: string[] };
 }) {
+  // busca os parametros da rota
   const [owner, repo] = params.slug;
 
-  const {
-    data: repository,
-    isLoading,
-    error,
-  } = useQuery({
+  // busca os detalhes do repositorio
+  const { data: repository, isLoading, error } = useQuery({
     queryKey: ['repository', owner, repo],
     queryFn: () => getRepositoryDetails(owner, repo),
   });
@@ -56,9 +59,9 @@ export default function RepositoryPage({
         <Card className='p-6 text-center text-destructive'>
           <AlertCircle className='mx-auto h-12 w-12 mb-4' />
           <h2 className='text-xl font-semibold mb-2'>
-            Error Loading Repository
+            Erro ao carregar repositório
           </h2>
-          <p>Failed to fetch repository details. Please try again later.</p>
+          <p>Falha ao carregar os detalhes do repositório. Tente novamente mais tarde.</p>
           <Link href='/'>
             <Button variant='outline' className='mt-4'>
               <ArrowLeft className='mr-2 h-4 w-4' /> Voltar para a pesquisa

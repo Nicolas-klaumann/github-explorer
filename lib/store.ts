@@ -7,6 +7,9 @@ interface GithubStore {
   setActiveTab: (tab: 'repositories' | 'starred') => void;
 }
 
+/**
+ * Cria variaveis de estado globais
+ */
 export const useGithubStore = create<GithubStore>((set) => ({
   username: '',
   setUsername: (username) => set({ username }),
