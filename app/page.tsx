@@ -17,7 +17,7 @@ export default function Home() {
   const { username } = useGithubStore();
 
   // state para armazenar a largura da tela de forma reativa.
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     // função para atualizar a largura da tela
@@ -27,6 +27,9 @@ export default function Home() {
 
     // rdiciona o listener para o evento de redimensionamento da tela
     window.addEventListener('resize', handleResize);
+
+    // Chama a função para definir a largura inicial
+    setScreenWidth(window.innerWidth);
 
     // remove o listener quando o componente for desmontado
     return () => {
