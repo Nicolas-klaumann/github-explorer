@@ -17,7 +17,7 @@ export default function Home() {
   const { username } = useGithubStore();
 
   // state para armazenar a largura da tela de forma reativa.
-  const [screenWidth, setScreenWidth] = useState<number | undefined>(undefined);
+  const [screenWidth, setScreenWidth] = useState<number>(1024);
 
   useEffect(() => {
     // função para atualizar a largura da tela
