@@ -45,7 +45,7 @@ export function User() {
             {showDetails ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
           </button>
 
-          {/* Informações adicionais (expansíveis) */}
+          {/* Informações adicionais */}
           {showDetails && (
             <div className="mt-4 w-full text-gray-800 text-sm transition-all duration-300">
               {user.company && (
