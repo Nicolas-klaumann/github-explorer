@@ -23,18 +23,18 @@ export function User() {
   return (
     <div className='flex flex-col items-center'>
       {user && (
-        <div className="flex flex-col items-center mb-8 p-6 w-auto max-w-md bg-white rounded-lg shadow-md border border-gray-200">
+        <div className="flex flex-col items-center mb-8 p-6 w-auto max-w-md bg-background rounded-lg shadow-md border">
           {/* Foto e Nome */}
           <img
             src={user.avatar_url}
             alt="Foto do usuário"
             className="w-24 h-24 rounded-full border-2 border-gray-300"
           />
-          <h2 className="mt-3 text-xl font-bold text-gray-900">{user.name || 'Nome não disponível'}</h2>
+          <h2 className="mt-3 text-xl font-bold">{user.name || 'Nome não disponível'}</h2>
           <p className="text-gray-600 text-sm">@{username}</p>
 
           {/* Biografia */}
-          {user.bio && <p className="mt-3 text-center text-gray-700 px-4">{user.bio}</p>}
+          {user.bio && <p className="mt-3 text-center px-4">{user.bio}</p>}
 
           {/* Botão de expansão */}
           <button

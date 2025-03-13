@@ -7,6 +7,7 @@ import { Github } from 'lucide-react';
 import { User } from '@/components/user';
 import { useGithubStore } from '@/lib/store';
 import { useEffect, useState } from 'react';
+import ThemeSwitcher from '@/components/theme-switcher';
 
 /**
  * Função principal da aplicação (Executada pelo router)
