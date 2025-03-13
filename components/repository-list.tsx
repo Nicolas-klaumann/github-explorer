@@ -11,16 +11,13 @@ import { NoRepositories } from './validations/NoRepositories';
 import { Error } from './validations/Error';
 import { Loading } from './validations/Loading';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-/**
- * Função responsável por renderizar a listagem de respositórios
- * @returns 
- */
 export function RepositoryList() {
   const { username, activeTab } = useGithubStore();
   const [filter, setFilter] = useState('');
+  const [language, setLanguage] = useState('all');
 
-  // busca os repositorios
   const { data: repositories, isLoading, error } = useQuery({
     queryKey: [activeTab, username],
     queryFn: () =>
@@ -46,25 +43,45 @@ export function RepositoryList() {
     return <Error />;
   }
 
-  // busca os repositorios filtrados
   const filteredRepositories = repositories?.filter(repo =>
-    repo.name.toLowerCase().includes(filter.toLowerCase())
+    repo.name.toLowerCase().includes(filter.toLowerCase()) &&
+    (language === 'all' || repo.language === language)
   );
 
   return (
     <div>
-      {/* Filtro de repositorios */}
-      <form className="relative mb-8">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
-        <Input
-          type="text"
-          placeholder="Usuário do GitHub"
-          className="pl-10"
-          onChange={(e) => setFilter(e.target.value)}
-        />
-      </form>
+      {/* Filtros */}
+      <div className="flex gap-4 mb-8">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+          <Input
+            type="text"
+            placeholder="Filtrar por nome"
+            className="pl-10"
+            onChange={(e) => setFilter(e.target.value)}
+          />
+        </div>
 
-      {/* Listagem de repositorios */}
+        <Select onValueChange={(value) => setLanguage(value)}>
+          <SelectTrigger className='w-[20%]'>
+            <SelectValue placeholder="Linguagem"/>
+          </SelectTrigger>
+          <SelectContent>
+              <SelectItem value="all">Todas</SelectItem>
+              <SelectItem value="JavaScript">JavaScript</SelectItem>
+              <SelectItem value="TypeScript">TypeScript</SelectItem>
+              <SelectItem value="C++">C++</SelectItem>
+              <SelectItem value="Python">Python</SelectItem>
+              <SelectItem value="HTML">HTML</SelectItem>
+              <SelectItem value="PHP">PHP</SelectItem>
+              <SelectItem value="Vue">Vue</SelectItem>
+              <SelectItem value="Java">Java</SelectItem>
+              <SelectItem value="Rust">Rust</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Listagem de repositórios */}
       {!filteredRepositories?.length ? (
         <NoRepositories />
       ) : (

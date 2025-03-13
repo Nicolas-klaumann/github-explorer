@@ -23,15 +23,15 @@ export function User() {
   return (
     <div className='flex flex-col items-center'>
       {user && (
-        <div className="flex flex-col items-center mb-8 p-6 w-auto max-w-md bg-background rounded-lg shadow-md border">
+        <div className="flex flex-col items-center mb-8 p-6 w-auto max-w-md bg-background rounded-lg ">
           {/* Foto e Nome */}
           <img
             src={user.avatar_url}
             alt="Foto do usuário"
-            className="w-24 h-24 rounded-full border-2 border-gray-300"
+            className="w-24 h-24 rounded-full border-2"
           />
           <h2 className="mt-3 text-xl font-bold">{user.name || 'Nome não disponível'}</h2>
-          <p className="text-gray-600 text-sm">@{username}</p>
+          <p className="text-muted-foreground text-sm">@{username}</p>
 
           {/* Biografia */}
           {user.bio && <p className="mt-3 text-center px-4">{user.bio}</p>}
@@ -47,17 +47,17 @@ export function User() {
 
           {/* Informações adicionais */}
           {showDetails && (
-            <div className="mt-4 w-full text-gray-800 text-sm transition-all duration-300">
+            <div className="mt-4 w-full items-center text-muted-foreground text-sm transition-all duration-300">
               {user.company && (
                 <div className="flex items-center gap-2">
-                  <Building className="w-5 h-5 text-gray-500" />
+                  <Building className="w-5 h-5" />
                   <span>{user.company}</span>
                 </div>
               )}
 
               {user.blog && (
                 <div className="flex items-center gap-2 mt-2">
-                  <Globe className="w-5 h-5 text-gray-500" />
+                  <Globe className="w-5 h-5 " />
                   <a href={user.blog} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                     {user.blog}
                   </a>
@@ -66,14 +66,14 @@ export function User() {
 
               {user.location && (
                 <div className="flex items-center gap-2 mt-2">
-                  <MapPin className="w-5 h-5 text-gray-500" />
+                  <MapPin className="w-5 h-5" />
                   <span>{user.location}</span>
                 </div>
               )}
 
               {user.twitter_username && (
                 <div className="flex items-center gap-2 mt-2">
-                  <Twitter className="w-5 h-5 text-gray-500" />
+                  <Twitter className="w-5 h-5" />
                   <a
                     href={`https://twitter.com/${user.twitter_username}`}
                     target="_blank"
@@ -87,7 +87,7 @@ export function User() {
 
               {user.created_at && (
                 <div className="flex items-center gap-2 mt-2">
-                  <Calendar className="w-5 h-5 text-gray-500" />
+                  <Calendar className="w-5 h-5" />
                   <span>Membro desde {format(new Date(user.created_at), 'dd/MM/yyyy')}</span>
                 </div>
               )}
