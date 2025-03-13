@@ -47,7 +47,7 @@ export function User() {
 
           {/* Informações adicionais */}
           {showDetails && (
-            <div className="mt-4 w-full items-center text-muted-foreground text-sm transition-all duration-300">
+            <div className="mt-4 w-full items-center text-muted-foreground text-sm">
               {user.company && (
                 <div className="flex items-center gap-2">
                   <Building className="w-5 h-5" />
@@ -55,6 +55,7 @@ export function User() {
                 </div>
               )}
 
+              {/* Blog */}
               {user.blog && (
                 <div className="flex items-center gap-2 mt-2">
                   <Globe className="w-5 h-5 " />
@@ -64,6 +65,7 @@ export function User() {
                 </div>
               )}
 
+              {/* Localização */}
               {user.location && (
                 <div className="flex items-center gap-2 mt-2">
                   <MapPin className="w-5 h-5" />
@@ -71,6 +73,7 @@ export function User() {
                 </div>
               )}
 
+              {/* Twitter */}
               {user.twitter_username && (
                 <div className="flex items-center gap-2 mt-2">
                   <Twitter className="w-5 h-5" />
@@ -85,6 +88,7 @@ export function User() {
                 </div>
               )}
 
+              {/* Data de criação */}
               {user.created_at && (
                 <div className="flex items-center gap-2 mt-2">
                   <Calendar className="w-5 h-5" />

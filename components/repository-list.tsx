@@ -64,7 +64,7 @@ export function RepositoryList() {
 
         <Select onValueChange={(value) => setLanguage(value)}>
           <SelectTrigger className='w-[20%]'>
-            <SelectValue placeholder="Linguagem"/>
+            <SelectValue placeholder="Seleciona a Linguagem"/>
           </SelectTrigger>
           <SelectContent>
               <SelectItem value="all">Todas</SelectItem>
