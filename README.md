@@ -1,5 +1,12 @@
 # GitHub Explorer
 
+### Como rodar o projeto
+- npm install
+- docker-compo up --build (apenas na primeira vez que rodar o projeto, apos isso, basta rodar docker-compose up)
+
+### Link do deploy do projeto (utilizando VERSEL)
+https://github-explorer-tau-flame.vercel.app/
+
 # Tecnologias utilizadas
 - Next com typescript (estrutura e linguagem de desenvolvimento do projeto)
 - Tailwind para simplificar a estiliazação do projeto
@@ -8,9 +15,7 @@
 - Docker para cria uma container do projeto e facilitar instalação e desenvolvimento
 
 # Dificuldades encontradas
-- A princpal dificuldade que eu encontrei foi no roteamente dinamico para acessar o detalhamento dos repositorios, porem, apos algumas pesquisas consegui resolver a situação sem muitos problemas.
-- Explorar a API do GitHub para verificar as rotas que eu deveria acessar para me trazer os dados que precisava, tive que fazer algumas pesquisas por fora da api para conseguir entender melhor qual rota eu teria que usar.
-- Uma duvida em que eu pensei muito foi como eu poderia fazer o layout desse projeto. Acabei optando por um design mais minimalista sem muitos efeitos e distrações em telas, para tornar o aplicativo mais simples e objetivo.
+- As dificuldade que eu encontrei foi o roteamento dinamico, explorar a API do GitHub e alguns ajustes no style do projeto, porem, com um pouco de pesquisa conseguir resolver essas situações
 
 # Melhorias possiveis
-- Não vejo nenhuma melhoria significativa que possa ser feito em performance, estrutura ou padrões. Considerando a proposta o objetivo do projeto, essa aplicação possa ser mantido como está 
+- Não vejo nenhuma melhoria significativa que possa ser feito em performance, estrutura ou padrões. Considerando a proposta e o objetivo do projeto, acredito que essa aplicação possa ser mantido como está 
