@@ -11,14 +11,19 @@ import { NoRepositories } from './validations/NoRepositories';
 import { Error } from './validations/Error';
 import { Loading } from './validations/Loading';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import Modal from 'react-modal';
 
 export function RepositoryList() {
   const { username, activeTab } = useGithubStore();
   const [filter, setFilter] = useState('');
-  const [language, setLanguage] = useState('all');
+  const [language, setLanguage] = useState<string[]>(['all']);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data: repositories, isLoading, error } = useQuery({
+  const {
+    data: repositories,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: [activeTab, username],
     queryFn: () =>
       activeTab === 'repositories'
@@ -43,78 +48,108 @@ export function RepositoryList() {
     return <Error />;
   }
 
-  const filteredRepositories = repositories?.filter(repo =>
-    repo.name.toLowerCase().includes(filter.toLowerCase()) &&
-    (language === 'all' || repo.language === language)
+  const filteredRepositories = repositories?.filter(
+    (repo) =>
+      repo.name.toLowerCase().includes(filter.toLowerCase()) &&
+      (language.includes('all') || language.includes(repo.language))
   );
+
+  const toggleLanguage = (lang: string) => {
+    setLanguage((prev) => {
+      if (prev.includes(lang)) {
+        return prev.filter((item) => item !== lang);
+      } else {
+        return [...prev, lang];
+      }
+    });
+  };
 
   return (
     <div>
       {/* Filtros */}
-      <div className="flex gap-4 mb-8">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+      <div className='flex gap-4 mb-8'>
+        <div className='relative flex-1'>
+          <Search className='absolute  rounded-2xl left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground' />
           <Input
-            type="text"
-            placeholder="Filtrar por nome"
-            className="pl-10"
+            type='text'
+            placeholder='Filtrar por nome'
+            className='pl-10 rounded-2xl'
             onChange={(e) => setFilter(e.target.value)}
           />
         </div>
 
-        <Select onValueChange={(value) => setLanguage(value)}>
-          <SelectTrigger className='w-[20%]'>
-            <SelectValue placeholder="Seleciona a Linguagem"/>
-          </SelectTrigger>
-          <SelectContent>
-              <SelectItem value="all">Todas</SelectItem>
-              <SelectItem value="JavaScript">JavaScript</SelectItem>
-              <SelectItem value="TypeScript">TypeScript</SelectItem>
-              <SelectItem value="C++">C++</SelectItem>
-              <SelectItem value="Python">Python</SelectItem>
-              <SelectItem value="HTML">HTML</SelectItem>
-              <SelectItem value="PHP">PHP</SelectItem>
-              <SelectItem value="Vue">Vue</SelectItem>
-              <SelectItem value="Java">Java</SelectItem>
-              <SelectItem value="Rust">Rust</SelectItem>
-          </SelectContent>
-        </Select>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className='w-[20%] py-2 px-4 bg-blue-500 text-white rounded-2xl hover:bg-blue-600 transition-colors duration-300'
+        >
+          Linguagens
+        </button>
       </div>
 
-      {/* Listagem de repositórios */}
+      {/* Listagem de repositórios */} 
       {!filteredRepositories?.length ? (
         <NoRepositories />
       ) : (
-        <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+        <div className='grid gap-7 grid-cols-1'>
           {filteredRepositories.map((repo) => (
-            <Link href={`/repository/${repo.full_name}`} key={repo.id}>
-              <Card className='p-4 hover:bg-accent transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg'>
-                <h3 className='font-semibold mb-2'>{repo.name}</h3>
-                <p className='text-sm text-muted-foreground mb-4 line-clamp-2'>
-                  {repo.description || 'No description available'}
-                </p>
-                <div className='flex gap-4 text-sm text-muted-foreground'>
-                  <span className='flex items-center gap-1'>
-                    <Star className='w-4 h-4' />
-                    {repo.stargazers_count}
-                  </span>
-                  <span className='flex items-center gap-1'>
-                    <GitFork className='w-4 h-4' />
-                    {repo.forks_count}
-                  </span>
-                  <span className='flex items-center gap-1'>
-                    <AlertCircle className='w-4 h-4' />
-                    {repo.open_issues_count}
-                  </span>
-                  <span className='ml-auto text-sm text-blue-500'>
-                    {repo.language}
-                  </span>
-                </div>
-              </Card>
-            </Link>
+            <div key={repo.id}>
+              <a href={`/repository/${repo.full_name}`} className='hover:underline mb-2 text-xl'>
+                {repo.name}
+              </a>
+              <p className='text-sm text-muted-foreground mb-4 line-clamp-2'>
+                {repo.description || 'No description available'}
+              </p>
+              <div className='flex gap-4 text-sm text-muted-foreground'>
+                <span className='flex items-center gap-1'>
+                  <Star size={24} color='black' />
+                  {repo.stargazers_count}
+                </span>
+                <span className='flex items-center gap-1'>
+                  <GitFork size={24} color='black' />
+                  {repo.forks_count}
+                </span>
+              </div>
+            </div>
           ))}
         </div>
       )}
+
+      {/* Modal de Seleção de Linguagens */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        contentLabel='Seleção de Linguagens'
+        className='modal' // Aplica a classe modal
+        overlayClassName='overlay' // Aplica a classe overlay
+      >
+        <div className="relative">
+          <button
+            onClick={() => setIsModalOpen(false)}
+            className="absolute top-2 right-2 text-xl font-bold text-black text-red-500"
+          >
+            X
+          </button>
+          <h2 className='text-xl mb-4 font-bold'>Linguagens</h2>
+          <div className='flex flex-col gap-4'>
+            {['All', 'JavaScript', 'TypeScript', 'C++', 'Python', 'HTML', 'PHP', 'Vue', 'Java', 'Rust'].map(
+              (lang) => (
+                <label
+                  key={lang}
+                  className="flex items-center gap-3 cursor-pointer py-2 px-4 rounded-md"
+                >
+                  <input
+                    type="checkbox"
+                    checked={language.includes(lang)}
+                    onChange={() => toggleLanguage(lang)}
+                    className="form-checkbox border-gray-300 text-primary w-5 h-5"
+                  />
+                  <span>{lang}</span>
+                </label>
+              )
+            )}
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

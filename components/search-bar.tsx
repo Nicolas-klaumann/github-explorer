@@ -34,7 +34,6 @@ export function SearchBar() {
           className="pl-10"
           />
       </form>
-      <ThemeSwitcher />
     </div>
   );
 }

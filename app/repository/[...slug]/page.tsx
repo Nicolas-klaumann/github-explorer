@@ -13,6 +13,7 @@ import {
   Clock,
   Book,
   ArrowLeft,
+  Github,
 } from 'lucide-react';
 import Link from 'next/link';
 import { format } from 'date-fns';
@@ -76,15 +77,18 @@ export default function RepositoryPage({
 
   return (
     <div className='container mx-auto px-4 py-8'>
-      <div className='mb-6'>
-        <Link href='/'>
-          <Button variant='outline' size='sm'>
-            <ArrowLeft className='mr-2 h-4 w-4' /> Voltar para a pesquisa
-          </Button>
-        </Link>
-      </div>
+      <header className="w-full bg-black py-4 fixed top-0 left-0 mb-8 flex items-center shadow-md z-50">
+        <a href='/' className='flex ml-[15%]'>
+            <Github className="text-white" size={32} />
+            <p className='text-white text-3xl font-bold' >GitHub</p>
+        </a>
+        <p className='text-white text-xl ml-5'>/</p>
+        <a href={`/repository/${owner}`} className='text-white ml-5'>{owner}</a>
+        <p className='text-white text-xl ml-5'>/</p>
+        <p className='text-white ml-5'>{repo}</p>
+      </header>
 
-      <div className='grid gap-6 md:grid-cols-3'>
+      <div className='grid gap-6 md:grid-cols-3 mt-[5%]'>
         <Card className='md:col-span-2 p-6 shadow-md'>
           <div className='flex items-start justify-between mb-4'>
             <div>
